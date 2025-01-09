@@ -1,13 +1,15 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from transformers import pipeline
+from django.views.decorators.csrf import csrf_exempt
+import google.generativeai as genai
 from .models import PDFDocument
 from .forms import PDFUploadForm
 import PyPDF2
-import json
 
-# Hugging Face pipelines
-chatbot_pipeline = pipeline("text2text-generation", model="facebook/blenderbot-400M-distill")
+# Configure the Generative AI SDK
+GENAI_API_KEY = "AIzaSyAeKZigfAIdTDe3NByjY6D8seo3PDjJyqw"
+genai.configure(api_key=GENAI_API_KEY)
 
 def extract_text_from_pdf(pdf_file):
     try:
@@ -42,12 +44,14 @@ def pdf_detail(request, pk):
     if request.method == 'POST':
         user_input = request.POST.get('user_input', '')
         try:
-            chat_response = chatbot_pipeline(f"Context: {extracted_text}\nUser: {user_input}", max_length=200)
-            chat_reply = chat_response[0]['generated_text']
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            response = model.generate_content(f"Context: {extracted_text}\nUser: {user_input}")
+            chat_reply = response.text if response and hasattr(response, 'text') else "Sorry, I could not understand that."
         except Exception as e:
             chat_reply = f"Error generating chatbot response: {e}"
     return render(request, 'pdf_detail.html', {'document': document, 'extracted_text': extracted_text, 'chat_reply': chat_reply})
 
+@csrf_exempt
 def chat_api(request):
     if request.method == 'POST':
         try:
@@ -57,8 +61,9 @@ def chat_api(request):
             document = get_object_or_404(PDFDocument, pk=document_id)
             with document.file.open() as pdf_file:
                 context = extract_text_from_pdf(pdf_file)
-            response = chatbot_pipeline(f"Context: {context}\nUser: {message}", max_length=200)
-            reply = response[0]['generated_text']
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            response = model.generate_content(f"Context: {context}\nUser: {message}")
+            reply = response.text if response and hasattr(response, 'text') else "Sorry, I could not understand that."
             return JsonResponse({'reply': reply})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
