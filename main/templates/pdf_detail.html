@@ -17,20 +17,48 @@
         header {
             background-color: #1db954; /* Spotify green */
             padding: 20px;
-            text-align: center;
         }
 
-        header h1 {
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title {
+            text-align: left;
+        }
+
+        .header-title h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 600;
             color: #fff;
         }
 
-        header p {
-            margin-top: 5px;
-            font-size: 16px;
+        .header-title p {
+            margin: 5px 0 0;
+            font-size: 14px;
             font-weight: 300;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav a {
+            background-color: #1db954;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            background-color: #1aa34a;
         }
 
         .container {
@@ -71,6 +99,8 @@
             max-height: 600px;
             display: flex;
             flex-direction: column;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
         .chat-container h3 {
@@ -87,22 +117,27 @@
             border: 1px solid #333;
             border-radius: 8px;
             background-color: #121212;
+            padding: 15px;
         }
 
         .user-message, .bot-message {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             padding: 10px;
             border-radius: 8px;
             background-color: #333;
+            max-width: 85%;
+            word-wrap: break-word;
         }
 
         .user-message {
             background-color: #444;
+            align-self: flex-end;
         }
 
         .bot-message {
             background-color: #1db954; /* Bright Green */
             color: #fff;
+            align-self: flex-start;
         }
 
         textarea {
@@ -114,6 +149,7 @@
             color: #fff;
             margin-bottom: 10px;
             font-size: 14px;
+            box-sizing: border-box;
         }
 
         button {
@@ -125,6 +161,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            box-sizing: border-box;
         }
 
         button:hover {
@@ -143,14 +180,43 @@
         footer p {
             margin: 0;
         }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .header-title h1 {
+                font-size: 20px;
+            }
+
+            nav {
+                margin: 10px 0;
+            }
+
+            .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Header Section with Navbar -->
     <header>
-        <h1>Synapse AI</h1>
-        <p>Insights and AI chat for your PDFs</p>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Synapse AI</h1>
+                <p>Insights and AI chat for your PDFs</p>
+            </div>
+            <nav>
+                <a href="/">Home</a> <!-- Home page link -->
+            </nav>
+        </div>
     </header>
 
     <!-- Content Section -->
@@ -207,6 +273,9 @@
                         botMessage.className = 'bot-message';
                         botMessage.textContent = `AI: ${botResponse}`;
                         chatLog.appendChild(botMessage);
+
+                        // Scroll to the bottom
+                        chatLog.scrollTop = chatLog.scrollHeight;
                     })
                     .catch(error => {
                         console.error('Error:', error);
