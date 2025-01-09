@@ -69,7 +69,39 @@
 
         /* Main Content Section */
         main {
-            flex: 1; /* Allows main content to grow and push the footer down */
+            display: flex; /* Create two columns */
+            justify-content: space-between;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Left Column for Description */
+        .left-column {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+            background-color: #181818;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-right: 20px;
+        }
+
+        .left-column h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .left-column p {
+            font-size: 16px;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        /* Right Column for Upload Form and PDFs */
+        .right-column {
+            flex: 1;
+            max-width: 50%;
         }
 
         .upload-form-container {
@@ -108,7 +140,7 @@
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjusts the columns dynamically */
             gap: 20px; /* Space between cards */
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 10px;
             padding: 0 20px;
             gap: 50px;
         }
@@ -153,43 +185,26 @@
 
         /* Media Queries for Responsiveness */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 24px;
+            main {
+                flex-direction: column;
             }
 
-            header p {
-                font-size: 14px;
+            .left-column {
+                margin-bottom: 20px;
             }
 
-            .upload-form-container {
-                padding: 15px;
-            }
-
-            .upload-form-container h2 {
-                font-size: 20px;
-            }
-
-            form button {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-
-            .pdf-card h3 {
-                font-size: 16px;
-            }
-
-            footer {
-                font-size: 12px;
+            .right-column {
+                max-width: 100%;
             }
         }
 
         @media (max-width: 480px) {
-            header h1 {
+            .left-column h2 {
                 font-size: 20px;
             }
 
-            header p {
-                font-size: 12px;
+            .left-column p {
+                font-size: 14px;
             }
 
             .upload-form-container {
@@ -237,36 +252,46 @@
 
     <!-- Main Content Section -->
     <main>
-        <!-- Upload Form Section -->
-        <div class="upload-form-container">
-            <h2>Upload PDF</h2>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Upload</button>
-            </form>
+        <!-- Left Column: App Description -->
+        <div class="left-column">
+            <h2>Welcome to Synapse AI</h2>
+            <p>
+                Synapse AI allows you to upload and interact with your PDF documents using AI-driven insights. Simply upload a PDF file, and our platform will help you analyze, extract, and process valuable information from it. Get started by uploading your first file!
+            </p>
         </div>
 
-        <!-- Uploaded PDFs Section -->
-        <h2 style="text-align: center; margin-top: 40px; font-size: 28px; font-weight: 400;">Your Uploaded PDFs</h2>
-        <div class="pdf-grid">
-            {% for document in documents %}
-                <div class="pdf-card">
-                    <a href="{% url 'pdf_detail' document.id %}">
-                        <h3>{{ document.name }}</h3>
-                    </a>
-                </div>
-            {% empty %}
-                <p style="text-align: center; font-size: 16px; color: #aaa;">No PDFs uploaded yet. Start by uploading a file above.</p>
-            {% endfor %}
+        <!-- Right Column: Upload Form and PDFs -->
+        <div class="right-column">
+            <!-- Upload Form Section -->
+            <div class="upload-form-container">
+                <h2>Upload PDF</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+
+            <!-- Uploaded PDFs Section -->
+            <h2 style="text-align: center; margin-top: 40px; font-size: 28px; font-weight: 400;">Your Uploaded PDFs</h2>
+            <div class="pdf-grid">
+                {% for document in documents %}
+                    <div class="pdf-card">
+                        <a href="{% url 'pdf_detail' document.id %}">
+                            <h3>{{ document.name }}</h3>
+                        </a>
+                    </div>
+                {% empty %}
+                    <p style="text-align: center; font-size: 16px; color: #aaa;">No PDFs uploaded yet. Start by uploading a file above.</p>
+                {% endfor %}
+            </div>
         </div>
     </main>
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2025 Synapse AI | All Rights Reserved</p>
+        <p>&copy; 2025 Synapse AI | All Rights Reserved | Developed with ❤️ in <span style="color: #1db954;">Kerala</span></p>
     </footer>
 
 </body>
 </html>
-
