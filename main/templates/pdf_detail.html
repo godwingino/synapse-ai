@@ -63,7 +63,7 @@
 
         .container {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 10px auto;
             padding: 20px;
             display: flex;
             flex-wrap: wrap;
@@ -118,6 +118,9 @@
             border-radius: 8px;
             background-color: #121212;
             padding: 15px;
+            display: flex;
+            flex-direction: column;
+            scrollbar-color:#1db954 black ;
         }
 
         .user-message, .bot-message {
@@ -150,6 +153,7 @@
             margin-bottom: 10px;
             font-size: 14px;
             box-sizing: border-box;
+            overflow-y: hidden;
         }
 
         button {
@@ -233,7 +237,7 @@
         <div class="chat-container">
             <h3>Chat with the AI</h3>
             <div id="chat-log">
-                {% for chat in chats %}
+                {% for chat in chats reversed %}
                     <div class="user-message">You:  {{ chat.user_input }}</div>
                     <div class="bot-message">SynapseAI:  {{ chat.chat_reply }}</div>
                 {% empty %}
@@ -253,6 +257,11 @@
     <!-- JavaScript for Chatbot Interaction -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        // Function to handle and convert **bold** text to <strong> for HTML rendering
+        function convertBoldText(message) {
+            return message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        }
+
         const sendButton = document.getElementById('send-button');
         const userInput = document.getElementById('user-input');
         const chatLog = document.getElementById('chat-log');
@@ -274,10 +283,13 @@
                     .then(response => {
                         const botResponse = response.data.reply;
 
+                        // Convert bold text from **bold** to <strong>bold</strong>
+                        const convertedResponse = convertBoldText(botResponse);
+
                         // Append bot message
                         const botMessage = document.createElement('div');
                         botMessage.className = 'bot-message';
-                        botMessage.textContent = `SynapseAI:  ${botResponse}`;
+                        botMessage.innerHTML = `SynapseAI:  ${convertedResponse}`;
                         chatLog.appendChild(botMessage);
 
                         // Scroll to the bottom
