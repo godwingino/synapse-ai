@@ -210,11 +210,11 @@
     <header>
         <div class="header-content">
             <div class="header-title">
-                <h1>Synapse AI</h1>
+                <a style="text-decoration: none;" href="/" ><h1>Synapse AI</h1> </a>
                 <p>Insights and AI chat for your PDFs</p>
             </div>
             <nav>
-                <a href="/">Home</a> <!-- Home page link -->
+                <a href="/">User</a> <!-- Home page link -->
             </nav>
         </div>
     </header>
@@ -223,6 +223,7 @@
     <div class="container">
         <!-- PDF Info Section -->
         <div class="pdf-info">
+            <a style="text-decoration: none;" href="/"><h2 style="color:#1db954;">Back</h2></a>
             <h2>{{ document.name }}</h2>
             <h3>Extracted Text:</h3>
             <p>{{ extracted_text }}</p>
@@ -232,7 +233,12 @@
         <div class="chat-container">
             <h3>Chat with the AI</h3>
             <div id="chat-log">
-                <!-- Chat messages will appear here -->
+                {% for chat in chats %}
+                    <div class="user-message">You:  {{ chat.user_input }}</div>
+                    <div class="bot-message">SynapseAI:  {{ chat.chat_reply }}</div>
+                {% empty %}
+                    <p style="color: #aaa;">No chat history available. Start a conversation!</p>
+                {% endfor %}
             </div>
             <textarea id="user-input" placeholder="Ask a question..." rows="3"></textarea>
             <button id="send-button">Send</button>
@@ -257,7 +263,7 @@
                 // Append user message
                 const userMessage = document.createElement('div');
                 userMessage.className = 'user-message';
-                userMessage.textContent = `You: ${message}`;
+                userMessage.textContent = `You:  ${message}`;
                 chatLog.appendChild(userMessage);
 
                 // Clear input
@@ -271,7 +277,7 @@
                         // Append bot message
                         const botMessage = document.createElement('div');
                         botMessage.className = 'bot-message';
-                        botMessage.textContent = `AI: ${botResponse}`;
+                        botMessage.textContent = `SynapseAI:  ${botResponse}`;
                         chatLog.appendChild(botMessage);
 
                         // Scroll to the bottom
