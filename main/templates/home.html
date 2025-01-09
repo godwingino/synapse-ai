@@ -4,294 +4,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synapse AI - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* General styles */
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            background-color: #121212; /* Spotify-like dark background */
-            color: #fff;
-        }
-
-        /* Header Section with Navbar */
-        header {
-            background-color: #1db954; /* Spotify green */
-            padding: 20px;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header-title {
-            text-align: left;
-        }
-
-        .header-title h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .header-title p {
-            margin: 5px 0 0;
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        nav {
-            margin-left: auto;
-        }
-
-        nav a {
-            background-color: #1db954;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        nav a:hover {
-            background-color: #1aa34a;
-        }
-
-        /* Main Content Section */
-        main {
-            display: flex; /* Create two columns */
-            justify-content: space-between;
-            padding: 20px;
-            flex: 1;
-        }
-
-        /* Left Column for Description */
-        .left-column {
-            flex: 1;
-            max-width: 50%;
-            padding: 20px;
-            background-color: #181818;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-right: 20px;
-        }
-
-        .left-column h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .left-column p {
-            font-size: 16px;
-            color: #aaa;
-            line-height: 1.5;
-        }
-
-        /* Right Column for Upload Form and PDFs */
-        .right-column {
-            flex: 1;
-            max-width: 50%;
-        }
-
-        .upload-form-container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #181818; /* Card dark background */
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        .upload-form-container h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        form button {
-            background-color: #1db954;
-            border: none;
-            padding: 10px 20px;
-            color: #fff;
-            font-size: 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        form button:hover {
-            background-color: #1aa34a;
-        }
-
-        .pdf-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjusts the columns dynamically */
-            gap: 20px; /* Space between cards */
-            max-width: 1200px;
-            margin: 10px;
-            padding: 0 20px;
-            gap: 50px;
-        }
-
-        .pdf-card {
-            background-color: #181818;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%;
-        }
-
-        .pdf-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(29, 185, 84, 0.8), 0 0 10px rgba(29, 185, 84, 0.6), 0 0 20px rgba(29, 185, 84, 0.5);
-        }
-
-        .pdf-card a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .pdf-card h3 {
-            font-size: 18px;
-            margin: 15px 0 10px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        footer {
-            background-color: #181818;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #aaa;
-            margin-top: auto; /* Pushes the footer to the bottom */
-        }
-
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
-
-            .left-column {
-                margin-bottom: 20px;
-            }
-
-            .right-column {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .left-column h2 {
-                font-size: 20px;
-            }
-
-            .left-column p {
-                font-size: 14px;
-            }
-
-            .upload-form-container {
-                padding: 10px;
-            }
-
-            .upload-form-container h2 {
-                font-size: 18px;
-            }
-
-            form button {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-
-            .pdf-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 10px;
-            }
-
-            .pdf-card h3 {
-                font-size: 14px;
-            }
-
-            footer {
-                font-size: 10px;
-            }
-        }
-    </style>
+    <title>Synapse AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-
-    <!-- Header Section with Navbar -->
-    <header>
-        <div class="header-content">
-            <div class="header-title">
-                <a style="text-decoration: none;" href="/" ><h1>Synapse AI</h1> </a>
-                <p>Upload your PDFs and interact with AI-driven insights</p>
+<body style="margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; background-color: #121212; color: white; font-family: 'Inter', sans-serif;">
+    <!-- Header -->
+    <header style="background-color: #1db954; padding: 12px 0;">
+        <div style="max-width: 1400px; width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 0-9 9v0c0 2.97 1.646 5.433 4 6.837"/><path d="M12 3a9 9 0 0 1 9 9v0c0 2.97-1.646 5.433-4 6.837"/><path d="M12 21a9 9 0 0 0 9-9h-4"/></svg>
+                    <h1 style="margin: 0; font-size: 22px; font-weight: 600;">
+                        <a href="/" style="text-decoration: none; color: white;">Synapse AI</a>
+                    </h1>
+                </div>
+                <p style="margin: 2px 0 0; font-size: 13px;">Upload your PDFs and interact with AI-driven insights</p>
             </div>
             <nav>
-                <a href="/">User</a> <!-- Home page link -->
+                <a href="/" style="background-color: #1db954; color: white; padding: 6px 16px; border-radius: 6px; border: 2px solid white; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block;">
+                    User
+                </a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content Section -->
-    <main>
-        <!-- Left Column: App Description -->
-        <div class="left-column">
-            <h2>Welcome to Synapse AI</h2>
-            <p>
-                Synapse AI allows you to upload and interact with your PDF documents using AI-driven insights. Simply upload a PDF file, and our platform will help you analyze, extract, and process valuable information from it. Get started by uploading your first file!
-            </p>
-        </div>
-
-        <!-- Right Column: Upload Form and PDFs -->
-        <div class="right-column">
-            <!-- Upload Form Section -->
-            <div class="upload-form-container">
-                <h2>Upload PDF</h2>
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Upload</button>
-                </form>
+    <!-- Main Content -->
+    <main style="flex: 1; max-width: 1400px; width: 95%; margin: 24px auto;">
+        <div style="display: flex; gap: 24px;">
+            <!-- Left Side - Description -->
+            <div style="width: 50%; background-color: #181818; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h2 style="font-size: 26px; font-weight: 600; margin-bottom: 20px; color: #1db954;">Welcome to Synapse AI</h2>
+                <div style="color: #d1d1d1; display: flex; flex-direction: column; gap: 20px;">
+                    <p style="margin: 0; line-height: 1.6;">
+                        Synapse AI is your intelligent document companion, revolutionizing the way you interact with PDFs. Our cutting-edge AI technology transforms static documents into dynamic, interactive knowledge sources.
+                    </p>
+                    <div>
+                        <h3 style="font-size: 18px; font-weight: 600; color: white; margin: 0 0 12px;">Key Features:</h3>
+                        <ul style="list-style-type: disc; margin: 0; padding-left: 20px;">
+                            <li style="margin-bottom: 8px;">Advanced PDF Analysis</li>
+                            <li style="margin-bottom: 8px;">AI-Powered Document Insights</li>
+                            <li style="margin-bottom: 8px;">Interactive Q&A System</li>
+                            <li style="margin-bottom: 8px;">Smart Document Management</li>
+                        </ul>
+                    </div>
+                    <p style="margin: 0; line-height: 1.6;">
+                        Whether you're a student, researcher, or professional, Synapse AI helps you extract meaningful insights from your documents with unprecedented ease and efficiency.
+                    </p>
+                </div>
             </div>
 
-            <!-- Uploaded PDFs Section -->
-            <h2 style="text-align: center; margin-top: 40px; font-size: 28px; font-weight: 400;">Your Uploaded PDFs</h2>
-            <div class="pdf-grid">
-                {% for document in documents %}
-                    <div class="pdf-card">
-                        <a href="{% url 'pdf_detail' document.id %}">
-                            <h3>{{ document.name }}</h3>
-                        </a>
+            <!-- Right Side - Upload and PDFs -->
+            <div style="width: 50%; display: flex; flex-direction: column; gap: 24px;">
+                <!-- Upload Form -->
+                <div style="background-color: #181818; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <h2 style="font-size: 22px; font-weight: 600; margin: 0 0 20px; display: flex; align-items: center; gap: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        Upload PDF
+                    </h2>
+                    <form method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 16px;">
+                        {% csrf_token %}
+                        {{ form.as_p|safe }}
+                        <button type="submit" style="width: 100%; background-color: #1db954; color: white; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; transition: background-color 0.3s;">
+                            Upload
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Uploaded PDFs -->
+                <div style="background-color: #181818; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <h2 style="font-size: 22px; font-weight: 600; margin: 0 0 20px; display: flex; align-items: center; gap: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Your PDFs
+                    </h2>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        {% if documents %}
+                            {% for document in documents %}
+                                <div style="background-color: #242424; padding: 12px; border-radius: 8px; transition: all 0.3s ease;">
+                                    <a href="{% url 'pdf_detail' document.id %}" style="text-decoration: none; color: white; display: block;">
+                                        <h3 style="margin: 0; font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            {{ document.name }}
+                                        </h3>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p style="text-align: center; color: #888; margin: 0;">No PDFs uploaded yet. Start by uploading a file above.</p>
+                        {% endif %}
                     </div>
-                {% empty %}
-                    <p style="text-align: center; font-size: 16px; color: #aaa;">No PDFs uploaded yet. Start by uploading a file above.</p>
-                {% endfor %}
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Synapse AI | All Rights Reserved | Developed with ❤️ in <span style="color: #1db954;">Kerala</span></p>
+    <!-- Footer -->
+    <footer style="background-color: #181818; text-align: center; padding: 12px; color: #888;">
+        <p style="margin: 0;">&copy; 2025 Synapse AI | All Rights Reserved | Developed with ❤️ in <span style="color: #1db954;">Kerala</span></p>
     </footer>
 
+    <script>
+        // Style Django form elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const formInputs = document.querySelectorAll('input[type="file"]');
+            formInputs.forEach(input => {
+                input.style.color = '#d1d1d1';
+                input.style.backgroundColor = 'transparent';
+                input.style.border = '2px dashed #404040';
+                input.style.borderRadius = '8px';
+                input.style.padding = '20px';
+                input.style.width = '100%';
+                input.style.boxSizing = 'border-box';
+                input.style.cursor = 'pointer';
+            });
+
+            // Style form paragraphs (Django wraps form fields in <p> tags)
+            const formParagraphs = document.querySelectorAll('form p');
+            formParagraphs.forEach(p => {
+                p.style.margin = '0';
+                p.style.padding = '0';
+            });
+        });
+    </script>
 </body>
 </html>

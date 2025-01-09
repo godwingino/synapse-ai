@@ -16,13 +16,16 @@
 
         header {
             background-color: #1db954; /* Spotify green */
-            padding: 20px;
+            padding: 12px 0;
         }
 
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            max-width: 1400px;
+            width: 95%;
+            margin: 0 auto;
         }
 
         .header-title {
@@ -31,14 +34,14 @@
 
         .header-title h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
             color: #fff;
         }
 
         .header-title p {
             margin: 5px 0 0;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 300;
         }
 
@@ -49,11 +52,11 @@
         nav a {
             background-color: #1db954;
             color: white;
-            padding: 10px 20px;
+            padding: 6px 16px;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 16px;
-            border: none;
+            font-size: 14px;
+            border: 2px solid white;
             cursor: pointer;
         }
 
@@ -211,14 +214,21 @@
 <body>
 
     <!-- Header Section with Navbar -->
-    <header>
-        <div class="header-content">
-            <div class="header-title">
-                <a style="text-decoration: none;" href="/" ><h1>Synapse AI</h1> </a>
-                <p>Insights and AI chat for your PDFs</p>
+    <header style="background-color: #1db954; padding: 12px 0;">
+        <div style="max-width: 1400px; width: 95%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 0-9 9v0c0 2.97 1.646 5.433 4 6.837"/><path d="M12 3a9 9 0 0 1 9 9v0c0 2.97-1.646 5.433-4 6.837"/><path d="M12 21a9 9 0 0 0 9-9h-4"/></svg>
+                    <h1 style="margin: 0; font-size: 22px; font-weight: 600;">
+                        <a href="/" style="text-decoration: none; color: white;">Synapse AI</a>
+                    </h1>
+                </div>
+                <p style="margin: 2px 0 0; font-size: 13px;">Upload your PDFs and interact with AI-driven insights</p>
             </div>
             <nav>
-                <a href="/">User</a> <!-- Home page link -->
+                <a href="/" style="background-color: #1db954; color: white; padding: 6px 16px; border-radius: 6px; border: 2px solid white; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block;">
+                    User
+                </a>
             </nav>
         </div>
     </header>
@@ -227,19 +237,23 @@
     <div class="container">
         <!-- PDF Info Section -->
         <div class="pdf-info">
-            <a style="text-decoration: none;" href="/"><h2 style="color:#1db954;">Back</h2></a>
-            <h2>{{ document.name }}</h2>
+            <a style="text-decoration: none;" href="/"><h2 style="color:#1db954;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg> Back</h2></a>
+            <h2>Name : {{ document.name }}</h2>
             <h3>Extracted Text:</h3>
             <p>{{ extracted_text }}</p>
         </div>
 
         <!-- Chat Section -->
         <div class="chat-container">
-            <h3>Chat with the AI</h3>
+            <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>  Chat with the AI</h3>
             <div id="chat-log">
                 {% for chat in chats reversed %}
-                    <div class="user-message">You:  {{ chat.user_input }}</div>
-                    <div class="bot-message">SynapseAI:  {{ chat.chat_reply }}</div>
+                    <div class="user-message"><strong>You:</strong>  {{ chat.user_input }}</div>
+                    <div class="bot-message"> <strong><span style="color: #121212;">SynapseAI:</span></strong>  {{ chat.chat_reply }}</div>
                 {% empty %}
                     <p style="color: #aaa;">No chat history available. Start a conversation!</p>
                 {% endfor %}
